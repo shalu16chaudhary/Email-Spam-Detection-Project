@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Spam Detector</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #83a4d4, #b6fbff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: rgba(255, 255, 255, 0.96);
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            margin-top: -40px;
+        }
+
+        .header-image {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2E8B57;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            resize: none;
+            font-size: 15px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: #2E8B57;
+            color: white;
+            padding: 12px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #226b46;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 17px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .spam {
+            color: red;
+        }
+
+        .not-spam {
+            color: green;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: gray;
+            font-size: 13px;
+        }
+
+        .icon {
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Image Banner -->
+       <img src="https://cdn-icons-png.flaticon.com/512/1810/1810743.png" alt="Email Spam" class="header-image" style="max-width: 150px;">
+
+
+        <div class="container">
+            <h1>📩 Email Spam Detector</h1>
+
+            <form method="POST" action="/predict">
+                <textarea name="message" placeholder="Type or paste your email message..." required>{{ message if message else '' }}</textarea>
+                <button type="submit" class="btn">🔍 Check for Spam</button>
+            </form>
+
+            {% if prediction %}
+            <div class="result">
+                <span class="{{ 'not-spam' if prediction == '✅ Not Spam' else 'spam' }}">
+                    <span class="icon">{{ prediction }}</span>
+                </span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="footer">
+            🚀 Made with ❤️ by Shalu | Flask + ML
+        </div>
+    </div>
+</body>
+</html>
